@@ -3,7 +3,7 @@
     android:id="@+id/landing_list_row"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="10dp"
     >
 
@@ -37,11 +37,16 @@
 
         <ImageView
             android:id="@+id/landing_list_row_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/landing_list_row_description"
             android:layout_below="@+id/landing_list_row_heading"
+            android:maxWidth="@dimen/image_max_size"
+            android:scaleType="fitStart"
+            android:adjustViewBounds="true"
+            android:maxHeight="@dimen/image_max_size"
+
             />
     </RelativeLayout>
 

@@ -19,9 +19,10 @@ public class SampleListViewApplication extends Application {
     public void onCreate() {
         super.onCreate();
         setContext(this);
+        //Initialize Image loader for the 1st time
         initImageLoader(getApplicationContext());
-    }
 
+    }
 
     /**
      * Get application context for further use through out the application
@@ -35,9 +36,10 @@ public class SampleListViewApplication extends Application {
     }
 
     /**
+     * Universal Image Loader
      * Initialize ImageLoader from universalImageLoader lib with initial configuration.
      * This will be used to load images in the specified ImageView lazily.
-     *
+     * More details : https://github.com/nostra13/Android-Universal-Image-Loader
      */
     public static void initImageLoader(Context context) {
         ImageLoaderConfiguration.Builder config = new ImageLoaderConfiguration.Builder(context);
@@ -51,4 +53,5 @@ public class SampleListViewApplication extends Application {
         // Initialize ImageLoader with configuration.
         ImageLoader.getInstance().init(config.build());
     }
+
 }
