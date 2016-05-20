@@ -5,14 +5,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.android.samplelistview.R;
-import com.android.samplelistview.adapter.CustomListAdapter;
+import com.android.samplelistview.adapter.CustomRecycleViewAdapter;
 import com.android.samplelistview.model.Country;
 import com.android.samplelistview.network.GetJSONDataHandler;
 import com.android.samplelistview.network.ResponseHandler;
@@ -25,16 +27,16 @@ import com.android.samplelistview.util.Utility;
  */
 public class LandingFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
-    private ListView listView;
+    private RecyclerView recyclerView;
     private Country countryDetails;
     private Activity parentActivity;
-    private CustomListAdapter customListAdapter;
+    private CustomRecycleViewAdapter customRecycleViewAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.landing_fragment_layout, container, false);
-        listView = (ListView) rootView.findViewById(R.id.landing_fragment_list);
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.landing_fragment);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -84,7 +86,8 @@ public class LandingFragment extends Fragment implements SwipeRefreshLayout.OnRe
      */
     ResponseHandler countryDataResponseHandler = new ResponseHandler() {
         @Override
-        public void onSucceess(Object response) {
+        //On success response
+        public void onSuccess(Object response) {
             countryDetails = (Country) response;
             parentActivity.runOnUiThread(new Runnable() {
                 @Override
@@ -95,10 +98,9 @@ public class LandingFragment extends Fragment implements SwipeRefreshLayout.OnRe
             });
         }
 
+        //on failure response
         @Override
         public void onError(final String msg) {
-
-
             parentActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -116,9 +118,11 @@ public class LandingFragment extends Fragment implements SwipeRefreshLayout.OnRe
      */
     private void loadDataToList(Country country) {
         parentActivity.setTitle(country.getTitle());
-        customListAdapter = new CustomListAdapter(parentActivity
-                , country.getRows());
-        listView.setAdapter(customListAdapter);
+        customRecycleViewAdapter = new CustomRecycleViewAdapter(getActivity(), country.getRows());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(customRecycleViewAdapter);
     }
 
     /**

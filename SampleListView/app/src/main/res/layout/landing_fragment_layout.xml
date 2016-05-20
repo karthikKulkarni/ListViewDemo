@@ -5,14 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
-        android:id="@+id/landing_fragment_list"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"
-        android:scrollbars="none"
-        >
-    </ListView>
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"/>
 
 </android.support.v4.widget.SwipeRefreshLayout>

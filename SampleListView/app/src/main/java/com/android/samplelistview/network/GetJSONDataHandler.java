@@ -45,7 +45,7 @@ public class GetJSONDataHandler {
                         try {
                             Gson gson = new Gson();
                             Country country = gson.fromJson(response, Country.class);
-                            handler.onSucceess(country);
+                            handler.onSuccess(country);
                         } catch (Exception e) {
                             handler.onError("Incorrect data received. Unable to load the view.");
                         }

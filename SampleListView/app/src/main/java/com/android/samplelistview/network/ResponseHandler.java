@@ -7,7 +7,7 @@ package com.android.samplelistview.network;
  * onError - returns error message back to UI
  */
 public interface ResponseHandler {
-    public void onSucceess(Object response);
+    public void onSuccess(Object response);
 
     public void onError(String msg);
 }
