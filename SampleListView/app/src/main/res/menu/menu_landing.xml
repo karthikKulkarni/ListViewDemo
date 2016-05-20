@@ -1,0 +1,11 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:com.android.samplelistview="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context=".LandingActivity">
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/refresh"
+        android:orderInCategory="1"
+        android:title="Refresh"
+        com.android.samplelistview:showAsAction="ifRoom"/>
+</menu>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    android:id="@+id/landing_list_row"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    >
+
+    <RelativeLayout
+        android:id="@+id/landing_list_row_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/landing_fragment_row_arrow">
+
+        <TextView
+            android:id="@+id/landing_list_row_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Heanding Not available"
+            android:textColor="@android:color/holo_blue_light"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/landing_list_row_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/landing_list_row_heading"
+            android:layout_toLeftOf="@+id/landing_list_row_img"
+            android:includeFontPadding="false"
+            android:paddingRight="5dp"
+            android:text="Description Not available"
+            android:textSize="16sp"/>
+
+        <ImageView
+            android:id="@+id/landing_list_row_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/landing_list_row_description"
+            android:layout_below="@+id/landing_list_row_heading"
+            />
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/landing_fragment_row_arrow"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/arrow"/>
+</RelativeLayout>
