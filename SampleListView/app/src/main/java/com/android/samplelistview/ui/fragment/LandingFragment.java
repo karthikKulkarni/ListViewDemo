@@ -30,21 +30,33 @@ public class LandingFragment extends Fragment implements SwipeRefreshLayout.OnRe
     private RecyclerView recyclerView;
     private Country countryDetails;
     private Activity parentActivity;
-    private CustomRecycleViewAdapter customRecycleViewAdapter;
+    private CustomRecycleViewAdapter customRecycleViewAdapter = null;
     private SwipeRefreshLayout swipeRefreshLayout;
 
+
+    // Initialise all the view components
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.landing_fragment_layout, container, false);
+
         recyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
 
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.landing_fragment);
         swipeRefreshLayout.setOnRefreshListener(this);
 
-        getCountryDetails();
         return rootView;
     }
 
+    //Make a webservice api call to get the data.
+    @Override
+    public void onStart() {
+        super.onStart();
+        getCountryDetails();
+    }
 
     /**
      * get the context of parent activity as soon as fragment is attached to activity
@@ -118,11 +130,13 @@ public class LandingFragment extends Fragment implements SwipeRefreshLayout.OnRe
      */
     private void loadDataToList(Country country) {
         parentActivity.setTitle(country.getTitle());
-        customRecycleViewAdapter = new CustomRecycleViewAdapter(getActivity(), country.getRows());
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(customRecycleViewAdapter);
+        if (customRecycleViewAdapter != null) {
+            customRecycleViewAdapter.notifyDataSetChanged();
+        } else {
+            customRecycleViewAdapter = new CustomRecycleViewAdapter(getActivity(), country.getRows());
+            recyclerView.setAdapter(customRecycleViewAdapter);
+
+        }
     }
 
     /**
