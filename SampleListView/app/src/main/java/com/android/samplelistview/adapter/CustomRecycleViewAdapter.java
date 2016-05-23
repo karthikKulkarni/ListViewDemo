@@ -20,7 +20,7 @@ import java.util.List;
  * Created by Karthik_Kulkarni01 on 5/20/2016.
  * This adapter is responsible to draw the list items on the fragment
  */
-public class CustomRecycleViewAdapter extends RecyclerView.Adapter<CustomRecycleViewAdapter.MyViewHolder> {
+public class CustomRecycleViewAdapter extends RecyclerView.Adapter<CustomRecycleViewAdapter.CountryViewHolder> {
 
     private List<Rows> countryRow;
     private Context context;
@@ -42,12 +42,12 @@ public class CustomRecycleViewAdapter extends RecyclerView.Adapter<CustomRecycle
     }
 
     //A view holder to hold the View components
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class CountryViewHolder extends RecyclerView.ViewHolder {
         public TextView heading;
         public TextView description;
         public ImageView image;
 
-        public MyViewHolder(View itemView) {
+        public CountryViewHolder(View itemView) {
             super(itemView);
             heading = (TextView) itemView.findViewById(R.id.landing_list_row_heading);
             description = (TextView) itemView.findViewById(R.id.landing_list_row_description);
@@ -57,15 +57,15 @@ public class CustomRecycleViewAdapter extends RecyclerView.Adapter<CustomRecycle
 
     //Initialize the View by inflating a layout for the 1st time.
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
+    public CountryViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout
                 .landing_fragment_row, viewGroup, false);
-        return new MyViewHolder(itemView);
+        return new CountryViewHolder(itemView);
     }
 
     //This method is called everytime a new item is to be loaded.
     @Override
-    public void onBindViewHolder(MyViewHolder myViewHolder, int i) {
+    public void onBindViewHolder(CountryViewHolder countryViewHolder, int i) {
         Rows row = countryRow.get(i);
 
         //Check if all the properties of row object are empty, if so delete the item from the list
@@ -79,12 +79,12 @@ public class CustomRecycleViewAdapter extends RecyclerView.Adapter<CustomRecycle
             };
             handler.post(r);
         }
-        myViewHolder.heading.setText(row.getTitle());
-        myViewHolder.description.setText(row.getDescription());
+        countryViewHolder.heading.setText(row.getTitle());
+        countryViewHolder.description.setText(row.getDescription());
 
         //Load images from the URL. For all the configurations check SampleListViewApplication
         // class.
-        ImageLoader.getInstance().displayImage(row.getImageHref(), myViewHolder.image, options, null);
+        ImageLoader.getInstance().displayImage(row.getImageHref(), countryViewHolder.image, options, null);
     }
 
     @Override
